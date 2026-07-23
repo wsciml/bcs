@@ -230,7 +230,7 @@ a {
 .dialog-card {
   width: 100%;
   max-width: 460px;
-  padding: 34px;
+  padding: clamp(22px, 5vw, 34px);
   background: #0d1116;
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 12px;
@@ -300,6 +300,39 @@ a {
 .copy-btn.copied {
   color: var(--accent-bright);
   border-color: oklch(0.82 0.12 200 / 0.6);
+}
+
+/* ---------- responsive / mobile ---------- */
+/* Hide the center nav links once brand + links + button stop fitting;
+   sections stay reachable by scrolling and the "Get in touch" button. */
+@media (max-width: 860px) {
+  .nav-links {
+    display: none !important;
+  }
+}
+
+/* Collapse the multi-column card grids to a single column on small screens.
+   (These override the inline grid-template-columns, hence !important.) */
+@media (max-width: 720px) {
+  .cap-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .team-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* Stack the metric strip and swap the vertical hairlines for horizontal ones. */
+@media (max-width: 640px) {
+  .metric-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .metric-grid .metric {
+    border-right: none !important;
+  }
+  .metric-grid .metric + .metric {
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
 }
 
 /* ---------- reduced motion ---------- */

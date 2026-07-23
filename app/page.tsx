@@ -74,6 +74,9 @@ const industries: string[] = [
 const mono: CSSProperties = { fontFamily: "'JetBrains Mono', monospace" };
 const grotesk: CSSProperties = { fontFamily: "'Space Grotesk', sans-serif" };
 
+// Fluid horizontal padding: 44px on desktop, easing down to 20px on phones.
+const PADX = "clamp(20px, 5vw, 44px)";
+
 function scrollToId(id: string) {
   const el = document.getElementById(id);
   if (!el) return;
@@ -159,7 +162,9 @@ export default function Home() {
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          padding: "22px 44px",
+          flexWrap: "wrap",
+          gap: 16,
+          padding: `22px ${PADX}`,
           borderBottom: "1px solid rgba(255,255,255,0.07)",
         }}
       >
@@ -187,11 +192,19 @@ export default function Home() {
               }}
             />
           </div>
-          <span style={{ ...grotesk, fontWeight: 700, letterSpacing: "-0.01em" }}>
+          <span
+            className="brand-name"
+            style={{
+              ...grotesk,
+              fontWeight: 700,
+              letterSpacing: "-0.01em",
+              fontSize: "clamp(13px, 3.2vw, 16px)",
+            }}
+          >
             Boulder Computational Solutions
           </span>
         </div>
-        <div style={{ display: "flex", gap: 30, fontSize: 14 }}>
+        <div className="nav-links" style={{ display: "flex", gap: 30, fontSize: 14 }}>
           <button className="nav-link" onClick={() => scrollToId("capabilities")}>
             Capabilities
           </button>
@@ -223,7 +236,12 @@ export default function Home() {
       </div>
 
       {/* hero */}
-      <div style={{ padding: "80px 44px 72px", position: "relative" }}>
+      <div
+        style={{
+          padding: `clamp(48px, 9vw, 80px) ${PADX} clamp(40px, 8vw, 72px)`,
+          position: "relative",
+        }}
+      >
         <div
           className="reveal"
           style={{
@@ -242,7 +260,7 @@ export default function Home() {
           style={{
             ...grotesk,
             fontWeight: 700,
-            fontSize: 60,
+            fontSize: "clamp(34px, 8vw, 60px)",
             lineHeight: 1.03,
             letterSpacing: "-0.025em",
             margin: 0,
@@ -255,7 +273,7 @@ export default function Home() {
         <p
           className="reveal"
           style={{
-            fontSize: 19,
+            fontSize: "clamp(16px, 2.4vw, 19px)",
             lineHeight: 1.6,
             color: "#aab3bf",
             maxWidth: 640,
@@ -271,6 +289,7 @@ export default function Home() {
           className="reveal"
           style={{
             display: "flex",
+            flexWrap: "wrap",
             gap: 14,
             marginTop: 40,
             transitionDelay: "0.24s",
@@ -333,6 +352,7 @@ export default function Home() {
       {/* metric strip */}
       <div
         id="results"
+        className="metric-grid"
         style={{
           display: "grid",
           gridTemplateColumns: "repeat(3,1fr)",
@@ -349,7 +369,7 @@ export default function Home() {
             key={i}
             className="metric reveal"
             style={{
-              padding: "30px 44px",
+              padding: `30px ${PADX}`,
               borderRight:
                 i < 2 ? "1px solid rgba(255,255,255,0.08)" : undefined,
               transitionDelay: `${i * 0.08}s`,
@@ -359,7 +379,7 @@ export default function Home() {
               className="metric-big"
               style={{
                 ...mono,
-                fontSize: 34,
+                fontSize: "clamp(26px, 5vw, 34px)",
                 fontWeight: 600,
                 color: ACCENT_BRIGHT,
               }}
@@ -374,7 +394,7 @@ export default function Home() {
       </div>
 
       {/* capabilities */}
-      <div id="capabilities" style={{ padding: "72px 44px" }}>
+      <div id="capabilities" style={{ padding: `clamp(48px, 8vw, 72px) ${PADX}` }}>
         <div
           className="reveal"
           style={{
@@ -393,7 +413,7 @@ export default function Home() {
           style={{
             ...grotesk,
             fontWeight: 700,
-            fontSize: 34,
+            fontSize: "clamp(26px, 5vw, 34px)",
             letterSpacing: "-0.02em",
             margin: "0 0 40px",
             transitionDelay: "0.06s",
@@ -402,6 +422,7 @@ export default function Home() {
           What we build
         </h2>
         <div
+          className="cap-grid"
           style={{
             display: "grid",
             gridTemplateColumns: "1fr 1fr",
@@ -461,7 +482,7 @@ export default function Home() {
       </div>
 
       {/* team */}
-      <div id="team" style={{ padding: "0 44px 72px" }}>
+      <div id="team" style={{ padding: `0 ${PADX} clamp(48px, 8vw, 72px)` }}>
         <div
           className="reveal"
           style={{
@@ -480,7 +501,7 @@ export default function Home() {
           style={{
             ...grotesk,
             fontWeight: 700,
-            fontSize: 34,
+            fontSize: "clamp(26px, 5vw, 34px)",
             letterSpacing: "-0.02em",
             margin: "0 0 40px",
             transitionDelay: "0.06s",
@@ -489,6 +510,7 @@ export default function Home() {
           Founded by applied mathematicians
         </h2>
         <div
+          className="team-grid"
           style={{
             display: "grid",
             gridTemplateColumns: "repeat(3,1fr)",
@@ -556,7 +578,7 @@ export default function Home() {
       <div
         id="industries"
         style={{
-          padding: "56px 44px",
+          padding: `clamp(40px, 7vw, 56px) ${PADX}`,
           borderTop: "1px solid rgba(255,255,255,0.08)",
           background: "#0c1015",
         }}
@@ -597,14 +619,18 @@ export default function Home() {
       {/* CTA */}
       <div
         id="contact"
-        style={{ padding: "80px 44px", textAlign: "center", position: "relative" }}
+        style={{
+          padding: `clamp(56px, 9vw, 80px) ${PADX}`,
+          textAlign: "center",
+          position: "relative",
+        }}
       >
         <h2
           className="reveal"
           style={{
             ...grotesk,
             fontWeight: 700,
-            fontSize: 40,
+            fontSize: "clamp(28px, 6.5vw, 40px)",
             letterSpacing: "-0.025em",
             margin: "0 auto",
             maxWidth: 640,
@@ -656,12 +682,14 @@ export default function Home() {
       {/* footer */}
       <div
         style={{
-          padding: "24px 44px",
+          padding: `24px ${PADX}`,
           borderTop: "1px solid rgba(255,255,255,0.08)",
           ...mono,
           fontSize: 12,
           color: "#5a6572",
           display: "flex",
+          flexWrap: "wrap",
+          gap: "8px 20px",
           justifyContent: "space-between",
         }}
       >
