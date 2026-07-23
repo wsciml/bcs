@@ -1,0 +1,314 @@
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #0a0d11;
+  color: #e7ecf2;
+  font-family: 'Public Sans', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ---------- easing tokens ---------- */
+:root {
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --accent: oklch(0.78 0.13 200);
+  --accent-bright: oklch(0.82 0.12 200);
+}
+
+/* ---------- scroll reveal ---------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(26px);
+  transition:
+    opacity 0.7s var(--ease-out),
+    transform 0.7s var(--ease-out);
+  will-change: opacity, transform;
+}
+.reveal.in-view {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---------- nav links ---------- */
+.nav-link {
+  position: relative;
+  cursor: pointer;
+  color: #9aa5b1;
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  transition: color 0.25s ease;
+}
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 100%;
+  height: 1px;
+  background: var(--accent-bright);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s var(--ease-out);
+}
+.nav-link:hover {
+  color: #e7ecf2;
+}
+.nav-link:hover::after {
+  transform: scaleX(1);
+}
+
+/* ---------- buttons ---------- */
+.btn {
+  cursor: pointer;
+  border: none;
+  font: inherit;
+  user-select: none;
+  transition:
+    transform 0.25s var(--ease-out),
+    box-shadow 0.25s ease,
+    background 0.25s ease,
+    border-color 0.25s ease;
+}
+.btn:hover {
+  transform: translateY(-2px);
+}
+.btn:active {
+  transform: translateY(0);
+}
+.btn:focus-visible {
+  outline: 2px solid var(--accent-bright);
+  outline-offset: 3px;
+}
+.btn-primary:hover {
+  box-shadow: 0 10px 32px -8px oklch(0.78 0.13 200 / 0.55);
+}
+.btn-secondary:hover {
+  border-color: oklch(0.82 0.12 200 / 0.6);
+  background: oklch(0.78 0.13 200 / 0.07);
+}
+
+/* ---------- brand mark ---------- */
+.brand {
+  cursor: pointer;
+}
+.brand .brand-mark {
+  transition: box-shadow 0.3s ease, transform 0.4s var(--ease-out);
+}
+.brand:hover .brand-mark {
+  transform: rotate(-6deg) scale(1.06);
+  box-shadow: 0 0 18px -2px oklch(0.78 0.13 200 / 0.6);
+}
+
+/* ---------- capability cards ---------- */
+.cap-card {
+  cursor: default;
+  transition: background 0.3s ease, transform 0.3s var(--ease-out);
+}
+.cap-card:hover {
+  background: #11161d !important;
+  transform: translateY(-3px);
+}
+.cap-card .cap-num {
+  transition: letter-spacing 0.3s ease, color 0.3s ease;
+}
+.cap-card:hover .cap-num {
+  letter-spacing: 0.18em;
+  color: var(--accent-bright);
+}
+
+/* ---------- metric cells ---------- */
+.metric {
+  transition: background 0.3s ease;
+}
+.metric:hover {
+  background: rgba(255, 255, 255, 0.025);
+}
+.metric .metric-big {
+  transition: transform 0.3s var(--ease-out);
+}
+.metric:hover .metric-big {
+  transform: translateY(-2px);
+}
+
+/* ---------- team cards ---------- */
+.team-card {
+  transition:
+    transform 0.3s var(--ease-out),
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+.team-card:hover {
+  transform: translateY(-4px);
+  border-color: oklch(0.78 0.13 200 / 0.35) !important;
+  box-shadow: 0 14px 44px -14px rgba(0, 0, 0, 0.65);
+}
+.team-card .headshot {
+  transition: transform 0.4s var(--ease-out);
+}
+.team-card:hover .headshot {
+  transform: scale(1.05);
+}
+
+/* ---------- industry pills ---------- */
+.pill {
+  cursor: default;
+  transition:
+    background 0.3s ease,
+    border-color 0.3s ease,
+    color 0.3s ease,
+    transform 0.3s var(--ease-out);
+}
+.pill:hover {
+  background: oklch(0.78 0.13 200 / 0.12);
+  border-color: oklch(0.78 0.13 200 / 0.5) !important;
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+/* ---------- CTA email links ---------- */
+.email-link {
+  position: relative;
+  transition: color 0.25s ease;
+}
+.email-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 100%;
+  height: 1px;
+  background: var(--accent-bright);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.3s var(--ease-out);
+}
+.email-link:hover::after {
+  transform: scaleX(1);
+}
+
+/* ---------- animated ridgeline ---------- */
+.ridgeline {
+  stroke-dasharray: 2800;
+  stroke-dashoffset: 2800;
+  animation: draw 2.6s var(--ease-out) 0.4s forwards;
+}
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* ---------- dialog ---------- */
+.dialog-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(4, 8, 11, 0.72);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  animation: fadeIn 0.25s ease forwards;
+}
+.dialog-card {
+  width: 100%;
+  max-width: 460px;
+  padding: 34px;
+  background: #0d1116;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  box-shadow: 0 30px 90px -24px rgba(0, 0, 0, 0.85);
+  animation: dialogIn 0.35s var(--ease-out) forwards;
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes dialogIn {
+  from { opacity: 0; transform: translateY(18px) scale(0.98); }
+  to { opacity: 1; transform: none; }
+}
+
+.dialog-close {
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: transparent;
+  color: #9aa5b1;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+}
+.dialog-close:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: #e7ecf2;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.contact-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 14px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 8px;
+  transition: border-color 0.25s ease, background 0.25s ease;
+}
+.contact-row:hover {
+  border-color: oklch(0.78 0.13 200 / 0.3);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.copy-btn {
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: transparent;
+  color: #cdd5de;
+  font: inherit;
+  font-size: 12px;
+  padding: 6px 12px;
+  border-radius: 5px;
+  white-space: nowrap;
+  transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+}
+.copy-btn:hover {
+  border-color: oklch(0.82 0.12 200 / 0.6);
+  color: #ffffff;
+  background: oklch(0.78 0.13 200 / 0.08);
+}
+.copy-btn.copied {
+  color: var(--accent-bright);
+  border-color: oklch(0.82 0.12 200 / 0.6);
+}
+
+/* ---------- reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1 !important; transform: none !important; transition: none; }
+  .ridgeline { animation: none; stroke-dashoffset: 0; }
+  .dialog-backdrop, .dialog-card { animation: none; }
+  *, *::before, *::after {
+    transition-duration: 0.01ms !important;
+  }
+}
